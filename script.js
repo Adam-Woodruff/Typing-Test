@@ -57,7 +57,7 @@ const Words = ['the','of','to','and','a','in','is','it','you','that','he','was',
                 'degree','populate','chick','dear','enemy','reply','drink','occur','support','speech','nature','range','steam','motion','path','liquid',
                 'log','meant','quotient','teeth','shell','neck'];
 
-const txtlength = 60;
+var txtlength = 60
 const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
@@ -123,11 +123,36 @@ function startTimer() {
 }
 
 function getTimerTime() {
-  return Math.floor((new Date() - startTime) / 1000)
+  return Math.ceil((new Date() - startTime) / 1000)
 }
 
 function WPMcalc() {
-  return Math.floor((txtlength / getTimerTime()) * 60)
+  return Math.ceil((txtlength / getTimerTime()) * 60)
+}
+
+function words1() {
+  txtlength = 10
+  getRandomString()
+}
+
+function words2() {
+  txtlength = 25
+  getRandomString()
+}
+
+function words3() {
+  txtlength = 50
+  getRandomString()
+}
+
+function words4() {
+  txtlength = 100
+  getRandomString()
+}
+
+function words5() {
+  txtlength = 200
+  getRandomString()
 }
 
 getRandomString();
