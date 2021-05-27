@@ -60,6 +60,7 @@ const Words = ['the','of','to','and','a','in','is','it','you','that','he','was',
 const txtlength = 20;
 const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.getElementById('quoteInput')
+const timerElement = document.getElementById('timer')
 let correct = true
 
 quoteInputElement.addEventListener('input', () => {
@@ -94,7 +95,6 @@ function getRandomString() {
     quoteDisplayElement.innerHTML = ''
     random_string.split('').forEach(character => {
         const characterSpan = document.createElement('span')
-        characterSpan.classList.add('correct')
         characterSpan.innerText = character
         quoteDisplayElement.appendChild(characterSpan)
     })
@@ -102,4 +102,19 @@ function getRandomString() {
     console.log(random_string);
 }
 
+let startTime
+function startTimer() {
+  timerElement.innerText = 0
+  startTime = new Date()
+  setInterval(() => {
+    timer.innerText = getTimerTime()
+  }, 1000)
+}
+
+function getTimerTime() {
+  return Math.floor((new Date() - startTime) / 1000)
+}
+
+quoteInputElement.value = null
+startTimer();
 getRandomString();
