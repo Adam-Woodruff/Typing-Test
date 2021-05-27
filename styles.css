@@ -45,7 +45,7 @@ h1{
     margin: auto;
     resize: none;
     padding: .5rem 1rem;
-    font-size: 1rem;
+    font-size: 2rem;
 }
 
 .quote-input:focus{
@@ -108,10 +108,12 @@ h1{
 }
 
 .btn-container > button {
-    padding: auto;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    border: 2px solid #776e65;
     border-radius: .25rem;
-    background-color: #d8d4d0;
-    width: 35px;
-    margin: 5px;
-    text-align: left;
-    font-size: 10px;
+    background-color: #bbada0;
+    width: 40px;
+    margin: 0px 8px 3px; 
+    font-size: 1rem; 
