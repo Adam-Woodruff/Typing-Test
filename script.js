@@ -57,64 +57,77 @@ const Words = ['the','of','to','and','a','in','is','it','you','that','he','was',
                 'degree','populate','chick','dear','enemy','reply','drink','occur','support','speech','nature','range','steam','motion','path','liquid',
                 'log','meant','quotient','teeth','shell','neck'];
 
-const txtlength = 20;
+const txtlength = 60;
 const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
-let correct = true
+const WPMelement = document.getElementById('WPM')
+
+var startInput = true
+
+WPMelement.innerText = "0 WPM"
 
 quoteInputElement.addEventListener('input', () => {
-    const arrayQuote = quoteDisplayElement.querySelectorAll('span')
-    const arrayValue = quoteInputElement.value.split('')
+  if (startInput == true) {
+    startTimer()
+    startInput = false
+  }
+  const arrayQuote = quoteDisplayElement.querySelectorAll('span')
+  const arrayValue = quoteInputElement.value.split('')
 
-    arrayQuote.forEach((characterSpan, index) => {
-        const character = arrayValue[index]
-        if (character == null) {
-            characterSpan.classList.remove('correct')
-            characterSpan.classList.remove('incorrect')
-            correct = false
-        }else if (character === characterSpan.innerText) {
-            characterSpan.classList.add('correct')
-            characterSpan.classList.remove('incorrect')
-        }else {
-            characterSpan.classList.remove('correct')
-            characterSpan.classList.add('incorrect')
-            correct = false
-        }
-    })
-    if (correct) getRandomString()
+  let correct = true
+  arrayQuote.forEach((characterSpan, index) => {
+    const character = arrayValue[index]
+    if (character == null) {
+      characterSpan.classList.remove('correct')
+      characterSpan.classList.remove('incorrect')
+      correct = false
+    } else if (character === characterSpan.innerText) {
+      characterSpan.classList.add('correct')
+      characterSpan.classList.remove('incorrect')
+    } else {
+      characterSpan.classList.remove('correct')
+      characterSpan.classList.add('incorrect')
+      correct = false
+    }
+  })
+  if (correct) {
+    WPM.innerHTML = `<p class="WPM">${WPMcalc()} WPM</p>`
+    startInput = true
+    getRandomString()
+  }
 })
 
-function getRandomString() {
-    var i;
-    var random_string = "";
-    for (i = 0; i < txtlength; i++) {
-        var random_string = random_string.concat(Words[Math.floor(Math.random() * Words.length)])
-        var random_string = random_string.concat(" ")
-    }
-    quoteDisplayElement.innerHTML = ''
-    random_string.split('').forEach(character => {
-        const characterSpan = document.createElement('span')
-        characterSpan.innerText = character
-        quoteDisplayElement.appendChild(characterSpan)
-    })
-    quoteInputElement.value = null
-    console.log(random_string);
+async function getRandomString() {
+  var i;
+  var random_string = "";
+  for (i = 0; i < txtlength-1; i++) {
+    var random_string = random_string.concat(Words[Math.floor(Math.random() * Words.length)], " ")
+  }
+  var random_string = random_string.concat(Words[Math.floor(Math.random() * Words.length)]) 
+  // so there is no space after the text
+  quoteDisplayElement.innerHTML = ''
+  random_string.split('').forEach(character => {
+    const characterSpan = document.createElement('span')
+    characterSpan.innerText = character
+    quoteDisplayElement.appendChild(characterSpan)
+  })
+  quoteInputElement.value = null
+
+  console.log(random_string);
 }
 
 let startTime
 function startTimer() {
-  timerElement.innerText = 0
-  startTime = new Date()
-  setInterval(() => {
-    timer.innerText = getTimerTime()
-  }, 1000)
+    startTime = new Date()
 }
 
 function getTimerTime() {
   return Math.floor((new Date() - startTime) / 1000)
 }
 
-quoteInputElement.value = null
-startTimer();
+function WPMcalc() {
+  return Math.floor((txtlength / getTimerTime()) * 60)
+}
+
 getRandomString();
