@@ -132,27 +132,34 @@ function WPMcalc() {
 
 function words1() {
   txtlength = 10
+  startInput = true
   getRandomString()
 }
 
 function words2() {
   txtlength = 25
+  startInput = true
   getRandomString()
 }
 
 function words3() {
   txtlength = 50
+  startInput = true
   getRandomString()
 }
 
 function words4() {
   txtlength = 100
+  startInput = true
   getRandomString()
 }
 
 function words5() {
   txtlength = 200
+  startInput = true
   getRandomString()
 }
+
+
 
 getRandomString();
