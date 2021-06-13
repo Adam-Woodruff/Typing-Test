@@ -141,7 +141,7 @@ function calc() {
       errors += 1
     }
   })
-  var WordsPerMin = Math.ceil((((txtlength * 6) - errors) / 6) / (getTimerTime() / 60))
+  var WordsPerMin = Math.ceil((txtlength - errors) / (getTimerTime() / 60))
   var Accuracy = Math.floor(100 - (errors / count) * 100)
   WPM.innerHTML = `<p class="WPM">${WordsPerMin} WPM</p>`
   ACC.innerHTML = `<p class="ACC">${Accuracy}%</p>`
